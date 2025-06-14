@@ -1,0 +1,18 @@
+@{
+    ViewBag.Title = "Thuê truyện";
+}
+
+<h2>Thuê truyện</h2>
+
+<form asp-action="Create" method="post">
+    <p>Khách hàng:
+        <select name="CustomerId" asp-items="ViewBag.Customers"></select>
+    </p>
+    <p>Ngày thuê: <input type="date" name="RentalDate" /></p>
+    <p>Ngày trả: <input type="date" name="ReturnDate" /></p>
+    <p>Truyện:
+        <select name="BookId" asp-items="ViewBag.Books"></select>
+    </p>
+    <p>Số lượng: <input type="number" name="Quantity" /></p>
+    <button type="submit">Thuê</button>
+</form>

@@ -1,0 +1,45 @@
+@model List<Comic.Models.RentalReportViewModel>
+
+<h2>Báo cáo truyện đã thuê</h2>
+
+<form method="get">
+    <p>Từ ngày: <input type="date" name="start" value="@ViewBag.Start" /></p>
+    <p>Đến ngày: <input type="date" name="end" value="@ViewBag.End" /></p>
+    <button type="submit">Xem báo cáo</button>
+</form>
+
+@if (Model.Any())
+{
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên truyện</th>
+                <th>Ngày thuê</th>
+                <th>Ngày trả</th>
+                <th>Khách thuê</th>
+                <th>Số lượng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int index = 1;
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@index++</td>
+                        <td>@item.BookTitle</td>
+                        <td>@item.RentalDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.ReturnDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.CustomerName</td>
+                        <td>@item.Quantity</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không có dữ liệu.</p>
+}

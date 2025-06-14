@@ -1,0 +1,9 @@
+@model Comic.Models.Book
+
+<h2>Thêm truyện mới</h2>
+
+<form asp-action="Create">
+    <p>Tiêu đề: <input asp-for="Title" /></p>
+    <p>Giá thuê/ngày: <input asp-for="PricePerDay" /></p>
+    <button type="submit">Lưu</button>
+</form>

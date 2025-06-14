@@ -1,0 +1,9 @@
+@model Comic.Models.Customer
+
+<h2>Đăng ký khách hàng</h2>
+
+<form asp-action="Register" method="post">
+    <p>Họ tên: <input asp-for="Fullname" /></p>
+    <p>Số điện thoại: <input asp-for="Phone" /></p>
+    <button type="submit">Đăng ký</button>
+</form>
