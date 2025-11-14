@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo PptxGenJS - Tạo Presentation Đẹp</title>
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            color: #333;
+        }
+
+        .info-box li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">📊</div>
+        <h1>PptxGenJS Demo</h1>
+        <p class="subtitle">Tạo Presentation PowerPoint Đẹp Mắt</p>
+
+        <div class="info-box">
+            <h3>Presentation Bao Gồm:</h3>
+            <ul>
+                <li>Slide 1: Title với gradient xanh dương</li>
+                <li>Slide 2: About với content box đẹp</li>
+                <li>Slide 3: Services với 4 items có icon</li>
+                <li>Slide 4: Metrics với table và chart</li>
+                <li>Slide 5: Thank You màu tím gradient</li>
+            </ul>
+        </div>
+
+        <button onclick="createPresentation()">
+            🎨 Tạo Presentation Ngay!
+        </button>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        function createPresentation() {
+            try {
+                // Tạo presentation mới
+                let pres = new PptxGenJS();
+
+                // Cấu hình kích thước slide (16:9)
+                pres.layout = "LAYOUT_WIDE";
+
+                // ============================================
+                // SLIDE 1: Title Slide
+                // ============================================
+                let slide1 = pres.addSlide();
+                slide1.background = { fill: "0088CC" };
+
+                slide1.addText("Welcome to My Presentation", {
+                    x: 0.5, y: 2.0, w: 9, h: 1.5,
+                    fontSize: 48, bold: true, color: "FFFFFF",
+                    align: "center", fontFace: "Arial"
+                });
+
+                slide1.addText("Crafted with PptxGenJS", {
+                    x: 0.5, y: 3.5, w: 9, h: 0.5,
+                    fontSize: 24, color: "F1F1F1",
+                    align: "center", italic: true
+                });
+
+                slide1.addShape(pres.shapes.OVAL, {
+                    x: 8.5, y: 0.3, w: 1.0, h: 1.0,
+                    fill: { color: "FFD700", transparency: 30 }
+                });
+
+                slide1.addShape(pres.shapes.OVAL, {
+                    x: 0.5, y: 4.5, w: 0.7, h: 0.7,
+                    fill: { color: "FF6B6B", transparency: 40 }
+                });
+
+                // ============================================
+                // SLIDE 2: About
+                // ============================================
+                let slide2 = pres.addSlide();
+                slide2.background = { fill: "F8F9FA" };
+
+                slide2.addShape(pres.shapes.RECTANGLE, {
+                    x: 0, y: 0, w: "100%", h: 1.0,
+                    fill: { color: "2C3E50" }
+                });
+
+                slide2.addText("About This Project", {
+                    x: 0.5, y: 0.3, w: 9, h: 0.5,
+                    fontSize: 32, bold: true, color: "FFFFFF"
+                });
+
+                slide2.addShape(pres.shapes.RECTANGLE, {
+                    x: 1.0, y: 1.5, w: 8.0, h: 3.0,
+                    fill: { color: "FFFFFF" },
+                    line: { color: "0088CC", pt: 3 }
+                });
+
+                slide2.addText([
+                    { text: "Key Features:\n\n", options: { fontSize: 24, bold: true, color: "0088CC" } },
+                    { text: "✓ Easy to use and powerful\n", options: { fontSize: 18, color: "2C3E50" } },
+                    { text: "✓ Create professional presentations\n", options: { fontSize: 18, color: "2C3E50" } },
+                    { text: "✓ Programmatically generate slides\n", options: { fontSize: 18, color: "2C3E50" } },
+                    { text: "✓ Supports charts, tables, and images", options: { fontSize: 18, color: "2C3E50" } }
+                ], {
+                    x: 1.5, y: 1.8, w: 7.0, h: 2.5
+                });
+
+                // ============================================
+                // SLIDE 3: Services
+                // ============================================
+                let slide3 = pres.addSlide();
+                slide3.background = { fill: "E8F5E9" };
+
+                slide3.addText("Our Services", {
+                    x: 0.5, y: 0.5, w: 9, h: 0.8,
+                    fontSize: 36, bold: true, color: "1B5E20", align: "left"
+                });
+
+                slide3.addShape(pres.shapes.RECTANGLE, {
+                    x: 0.5, y: 1.4, w: 3.0, h: 0.05,
+                    fill: { color: "4CAF50" }
+                });
+
+                const services = [
+                    { title: "Web Development", desc: "Modern and responsive websites" },
+                    { title: "Mobile Apps", desc: "iOS and Android applications" },
+                    { title: "Cloud Solutions", desc: "Scalable cloud infrastructure" },
+                    { title: "Consulting", desc: "Expert technical guidance" }
+                ];
+
+                services.forEach((service, index) => {
+                    const yPos = 2.0 + (index * 1.0);
+
+                    slide3.addShape(pres.shapes.RECTANGLE, {
+                        x: 1.0, y: yPos, w: 0.5, h: 0.5,
+                        fill: { color: "4CAF50" }
+                    });
+
+                    slide3.addText(`${index + 1}`, {
+                        x: 1.0, y: yPos, w: 0.5, h: 0.5,
+                        fontSize: 20, bold: true, color: "FFFFFF",
+                        align: "center", valign: "middle"
+                    });
+
+                    slide3.addText(service.title, {
+                        x: 1.7, y: yPos, w: 7.0, h: 0.3,
+                        fontSize: 20, bold: true, color: "1B5E20"
+                    });
+
+                    slide3.addText(service.desc, {
+                        x: 1.7, y: yPos + 0.3, w: 7.0, h: 0.3,
+                        fontSize: 14, color: "424242"
+                    });
+                });
+
+                // ============================================
+                // SLIDE 4: Table & Chart
+                // ============================================
+                let slide4 = pres.addSlide();
+                slide4.background = { fill: "FFF8E1" };
+
+                slide4.addText("Performance Metrics", {
+                    x: 0.5, y: 0.5, w: 9, h: 0.6,
+                    fontSize: 32, bold: true, color: "F57C00"
+                });
+
+                const tableData = [
+                    [
+                        { text: "Quarter", options: { bold: true, color: "FFFFFF", fill: "FF6B6B" } },
+                        { text: "Revenue", options: { bold: true, color: "FFFFFF", fill: "FF6B6B" } },
+                        { text: "Growth", options: { bold: true, color: "FFFFFF", fill: "FF6B6B" } },
+                        { text: "Status", options: { bold: true, color: "FFFFFF", fill: "FF6B6B" } }
+                    ],
+                    [
+                        { text: "Q1 2024", options: { fill: "FFE5E5" } },
+                        { text: "$125K", options: { fill: "FFE5E5" } },
+                        { text: "+15%", options: { fill: "FFE5E5", color: "2E7D32" } },
+                        { text: "✓ On Track", options: { fill: "FFE5E5", color: "2E7D32" } }
+                    ],
+                    [
+                        { text: "Q2 2024", options: { fill: "FFFFFF" } },
+                        { text: "$158K", options: { fill: "FFFFFF" } },
+                        { text: "+26%", options: { fill: "FFFFFF", color: "2E7D32" } },
+                        { text: "✓ Excellent", options: { fill: "FFFFFF", color: "2E7D32" } }
+                    ],
+                    [
+                        { text: "Q3 2024", options: { fill: "FFE5E5" } },
+                        { text: "$192K", options: { fill: "FFE5E5" } },
+                        { text: "+21%", options: { fill: "FFE5E5", color: "2E7D32" } },
+                        { text: "✓ Great", options: { fill: "FFE5E5", color: "2E7D32" } }
+                    ]
+                ];
+
+                slide4.addTable(tableData, {
+                    x: 1.0, y: 1.5, w: 8.0, h: 2.0,
+                    fontSize: 14, border: { color: "FF6B6B", pt: 1 },
+                    align: "center", valign: "middle"
+                });
+
+                const chartData = [
+                    {
+                        name: "Revenue",
+                        labels: ["Q1", "Q2", "Q3", "Q4"],
+                        values: [125, 158, 192, 215]
+                    }
+                ];
+
+                slide4.addChart(pres.ChartType.bar, chartData, {
+                    x: 1.5, y: 3.8, w: 7.0, h: 2.0,
+                    barDir: "col",
+                    chartColors: ["4CAF50"],
+                    showTitle: true,
+                    title: "Revenue Growth (in $K)",
+                    titleColor: "F57C00",
+                    titleFontSize: 16,
+                    showLegend: true,
+                    showValue: true
+                });
+
+                // ============================================
+                // SLIDE 5: Thank You
+                // ============================================
+                let slide5 = pres.addSlide();
+                slide5.background = { fill: "6A1B9A" };
+
+                slide5.addShape(pres.shapes.OVAL, {
+                    x: 0.2, y: 0.2, w: 2.0, h: 2.0,
+                    fill: { color: "9C27B0", transparency: 50 }
+                });
+
+                slide5.addShape(pres.shapes.OVAL, {
+                    x: 7.8, y: 3.5, w: 1.5, h: 1.5,
+                    fill: { color: "BA68C8", transparency: 50 }
+                });
+
+                slide5.addText("Thank You!", {
+                    x: 1.0, y: 2.0, w: 8.0, h: 1.0,
+                    fontSize: 54, bold: true, color: "FFFFFF", align: "center"
+                });
+
+                slide5.addText("Questions?", {
+                    x: 1.0, y: 3.2, w: 8.0, h: 0.5,
+                    fontSize: 24, color: "E1BEE7", align: "center", italic: true
+                });
+
+                slide5.addText("📧 contact@example.com", {
+                    x: 1.0, y: 4.0, w: 8.0, h: 0.4,
+                    fontSize: 18, color: "FFFFFF", align: "center"
+                });
+
+                slide5.addText("🌐 www.example.com", {
+                    x: 1.0, y: 4.5, w: 8.0, h: 0.4,
+                    fontSize: 18, color: "FFFFFF", align: "center"
+                });
+
+                // Lưu file
+                pres.writeFile({ fileName: "Beautiful-Presentation.pptx" });
+
+                // Hiển thị thông báo thành công
+                const statusDiv = document.getElementById('status');
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '✅ <strong>Thành công!</strong> File "Beautiful-Presentation.pptx" đã được tải xuống!';
+
+            } catch (error) {
+                console.error('Error:', error);
+                const statusDiv = document.getElementById('status');
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '❌ <strong>Lỗi:</strong> ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
